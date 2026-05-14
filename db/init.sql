@@ -15,3 +15,5 @@ INSERT INTO productos (nombre, descripcion, precio, stock) VALUES
 ('Snacks Dentales', 'Ayuda a la limpieza dental', 5990, 30),
 ('Comidita', 'Ayuda a la limpieza dental', 5990, 30);
 
+INSERT INTO productos (nombre, precio) VALUES ('Hueso de Juguete Pro DevOps', 15000);
+
