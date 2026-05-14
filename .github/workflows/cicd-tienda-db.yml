@@ -23,8 +23,8 @@ jobs:
       - name: Build and Push image
         run: |
           docker build -t ${{ secrets.ECR_REPO_URL_DB }}:latest ./db
-          docker push ${{ secrets.ECR_REPO_URL_DB }}:latest [cite: 306, 307]
+          docker push ${{ secrets.ECR_REPO_URL_DB }}:latest
 
       - name: Deploy to EC2 via SSM
         run: |
-          aws ssm send-command --instance-ids ${{ secrets.EC2_DB_INSTANCE_ID }} --document-name "AWS-RunShellScript" --parameters 'commands=["aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${{ secrets.ECR_REGISTRY }}", "docker pull ${{ secrets.ECR_REPO_URL_DB }}:latest", "docker stop tienda-db || true", "docker rm tienda-db || true", "docker run -d --name tienda-db -p 3306:3306 -v dbdata:/var/lib/mysql ${{ secrets.ECR_REPO_URL_DB }}:latest"]' [cite: 308, 309, 310, 311, 312, 313, 314, 315]
+          aws ssm send-command --instance-ids ${{ secrets.EC2_DB_INSTANCE_ID }} --document-name "AWS-RunShellScript" --parameters 'commands=["aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${{ secrets.ECR_REGISTRY }}", "docker pull ${{ secrets.ECR_REPO_URL_DB }}:latest", "docker stop tienda-db || true", "docker rm tienda-db || true", "docker run -d --name tienda-db -p 3306:3306 -v dbdata:/var/lib/mysql ${{ secrets.ECR_REPO_URL_DB }}:latest"]'
